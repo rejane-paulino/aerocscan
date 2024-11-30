@@ -1,4 +1,4 @@
-# AerOC Scan <img src="img/aerocscan.png" width="150" align="right" />
+# AerOC Scan <img src="img/aerocscan.png" width="250" align="right" />
 ![Version](https://img.shields.io/badge/version-v1-yellow)
 ![Language](https://img.shields.io/badge/language-Python-blue)
 
@@ -26,7 +26,7 @@ The AerOC Scan requires seven input data, including:
 * *local_time*: local time (hh:mm:ss);
 * *sensor_type*: sensor type (S2A_MSI', 'S2B_MSI', S3A_OLCI', 'S3B_OLCI', 'L8_OLI', 'L9_OLI2', or 'PACE_OCI').
 
-> The input parameters must be manually filled in `core.py`.
+> The input parameters must be manually configured in the `core.py` file.
 
 ## Output Parameters:
 Outputs include: 0-rawdata (data from AERONET-OC), 1-shapefile (site locations in .shp), 2-plots (median spectra from AERONET-OC Rrs), 3-rrs_median (AERONET-OC Rrs classified with OWTs), and 4-X (Rrs spectra corrected by sensor).
