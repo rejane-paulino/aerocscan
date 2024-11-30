@@ -1,4 +1,4 @@
-# AerOC Scan <img src="img/aerocscan.png" width="150" align="right" />
+# AerOC Scan <img src="img/aerocscan.png" width="250" align="right" />
 ![Version](https://img.shields.io/badge/version-v1-yellow)
 ![Language](https://img.shields.io/badge/language-Python-blue)
 
