@@ -135,7 +135,7 @@ def filtering_parameters(in_path: str, dest: str) -> None:
                 aod_l = []
                 for parm in range(0, len(filter_aod)):
                     array_r = np.array(filter_aod.reset_index().loc[parm][1:])
-                    bands_v = np.where(array_r > 0, bands, int(0)) # mapping the spectral bands
+                    bands_v = np.where(array_r > 0, bands, '0') # mapping the spectral bands
                     bands_v = np.array([int(k) for k in bands_v if k != '0'])
                     array_v = array_r[array_r > 0] # masking NaN data
                     ln_aod_values = np.log(array_v)
