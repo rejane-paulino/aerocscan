@@ -15,6 +15,8 @@ To run the AerOC Scan, it is necessary a suitable use the environment `aerocscan
             cd into the aerocscan directory
             python core.py
 
+> AerOC Scan can also be run through the `aerocscan.ipynb` file.
+
 ## Input Parameters:
 The AerOC Scan requires seven input data, including:  
 
@@ -26,7 +28,7 @@ The AerOC Scan requires seven input data, including:
 * *local_time*: local time (hh:mm:ss);
 * *sensor_type*: sensor type (S2A_MSI', 'S2B_MSI', S3A_OLCI', 'S3B_OLCI', 'L8_OLI', 'L9_OLI2', or 'PACE_OCI').
 
-> The input parameters must be manually configured in the `core.py` file.
+> The input parameters must be manually configured in the `core.py` or `aerocscan.ipynb` file.
 
 ## Output Parameters:
 Outputs include: 0-rawdata (data from AERONET-OC), 1-shapefile (site locations in .shp), 2-plots (median spectra from AERONET-OC Rrs), 3-rrs_median (AERONET-OC Rrs classified with OWTs), and 4-X (Rrs spectra corrected by sensor).
