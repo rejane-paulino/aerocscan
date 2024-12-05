@@ -32,3 +32,7 @@ The AerOC Scan requires seven input data, including:
 
 ## Output Parameters:
 Outputs include: 0-rawdata (data from AERONET-OC), 1-shapefile (site locations in .shp), 2-plots (median spectra from AERONET-OC Rrs), 3-rrs_median (AERONET-OC Rrs classified with OWTs), and 4-X (Rrs spectra corrected by sensor).
+
+## Notes:
+
+* The quality-checking criteria can be accessed in: Paulino et al. 2025. PACE (Plankton, Aerosol, Cloud, ocean Ecosystem): Preliminary analysis of the consistency of remote sensing reflectance products over aquatic systems. (Under Review).
