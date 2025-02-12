@@ -56,6 +56,7 @@ def download_aerOC(dest: str, start: str, end: str, level: str, id) -> None:
             '&LWN'+str(level)+'=1&AVG=10&if_no_html=1'
 
         wget.download(url, out=os.sep.join([dirout, filename_out]))
+
     return None
 
 
@@ -86,6 +87,7 @@ def filtering_timeframe(in_path: str, start: str, end: str, local_time: str, des
             filtered = data[(data['Datetime'].dt.time >= pd.to_datetime(datetime_start).time()) &
                             (data['Datetime'].dt.time <= pd.to_datetime(datetime_end).time())]
 
+
             if not filtered.empty:
                 filtered.to_csv(dirout + '/' + file + '.csv', sep=',')
             else:
@@ -93,6 +95,7 @@ def filtering_timeframe(in_path: str, start: str, end: str, local_time: str, des
 
         except:
             pass
+
     return None
 
 
@@ -165,6 +168,8 @@ def filtering_parameters(in_path: str, dest: str) -> None:
             out.to_csv(dirout + '/' + file)
         except:
             pass
+
+    return None
 
 
 def rrs(in_path: str, dest: str) -> None:
@@ -341,6 +346,7 @@ def owts(in_path: str, dest: str) -> None:
                 list_out.append(filter_)
         out = pd.concat(list_out)
         out.to_csv(dirout + '/' + file)
+
     return None
 
 
@@ -353,34 +359,42 @@ def shiftband_corr(in_path: str, sensor_type: str, dest: str) -> None:
     os.makedirs(dirout, exist_ok=True)
 
     # Verification the sensor type:
+    aero_all = [340, 380, 400, 412, 440, 443, 490, 500, 510, 531, 532, 551, 555, 560, 620, 667, 675, 681, 709, 779, 865, 870]
     if sensor_type == 'S2A_MSI':
         path = r"source/S2A_MSI_coeff.csv"
         aero_bands = [443, 490, 560, 667, 709, 779, 865]
         sensor_bands = [444, 497, 560, 665, 704, 782, 865]
+        missing_bands = [str(band) for band in list(set(aero_all) - set(aero_bands))]
     elif sensor_type == 'S2B_MSI':
         path = r"source/S2B_MSI_coeff.csv"
         aero_bands = [443, 490, 560, 667, 709, 779, 865]
         sensor_bands = [444, 497, 560, 665, 704, 782, 865]
+        missing_bands = [str(band) for band in list(set(aero_all) - set(aero_bands))]
     elif sensor_type == 'S3A_OLCI':
         path = r"source/S3A_OLCI_coeff.csv"
         aero_bands = [400, 412, 443, 490, 510, 560, 620, 667, 675, 681, 709, 779, 865]
         sensor_bands = [400, 412, 442, 490, 510, 560, 620, 665, 674, 681, 709, 779, 865]
+        missing_bands = [str(band) for band in list(set(aero_all) - set(aero_bands))]
     elif sensor_type == 'S3B_OLCI':
         path = r"source/S3B_OLCI_coeff.csv"
         aero_bands = [400, 412, 443, 490, 510, 560, 620, 667, 675, 681, 709, 779, 865]
         sensor_bands = [400, 412, 442, 490, 510, 560, 620, 665, 674, 681, 709, 779, 865]
+        missing_bands = [str(band) for band in list(set(aero_all) - set(aero_bands))]
     elif sensor_type == 'L8_OLI':
         path = r"source/L8_OLI_coeff.csv"
         aero_bands = [440, 490, 560, 667, 865]
         sensor_bands = [440, 480, 560, 655, 865]
+        missing_bands = [str(band) for band in list(set(aero_all) - set(aero_bands))]
     elif sensor_type == 'L9_OLI2':
         path = r"source/L9_OLI2_coeff.csv"
         aero_bands = [440, 490, 560, 667, 865]
         sensor_bands = [440, 480, 560, 655, 865]
+        missing_bands = [str(band) for band in list(set(aero_all) - set(aero_bands))]
     elif sensor_type == 'PACE_OCI':
         path = r"source/PACE_OCI_coeff.csv"
         aero_bands = [400, 412, 440, 443, 490, 500, 510, 531, 532, 551, 555, 560, 620, 667, 675, 681, 709, 779, 865, 870]
         sensor_bands = [400, 412, 439, 442, 489, 499, 509, 529, 532, 552, 554, 560, 620, 667, 675, 681, 709, 779, 864, 869]
+        missing_bands = [str(band) for band in list(set(aero_all) - set(aero_bands))]
     else:
         print('Sensor not found!')
 
@@ -395,20 +409,21 @@ def shiftband_corr(in_path: str, sensor_type: str, dest: str) -> None:
             list_out = []
             for i in unique_levels:
                 coeff_filter_owt = table_coeff.loc[table_coeff['OWT'] == i]
-                rrs_filter = data.loc[data['OWT'] == i]
-                if coeff_filter_owt.empty == False:
+                rrs_filter = data.loc[data['OWT'] == i].copy()  # Use .copy() to avoid SettingWithCopyWarning
+                if not coeff_filter_owt.empty:
                     for aerb, senb in zip(aero_bands, sensor_bands):
                         coeff_filter_v = coeff_filter_owt.loc[coeff_filter_owt['band'] == senb]
-                        if coeff_filter_v.empty == False:
-                            beta_1 = float(coeff_filter_v['b1'].values)
-                            beta_2 = float(coeff_filter_v['b2'].values)
+                        if not coeff_filter_v.empty:
+                            beta_1 = float(coeff_filter_v['b1'].iloc[0])
+                            beta_2 = float(coeff_filter_v['b2'].iloc[0])
                             rrs_filter[str(aerb)] = rrs_filter[str(aerb)].apply(
-                                lambda x: (beta_1 * x) + beta_2 if x != -9999 else x)
+                                lambda x: (beta_1 * x) + beta_2 if x != -9999 else -9999)
                         else:
                             rrs_filter[str(aerb)] = -9999  # without coefficient correction
+                    rrs_filter.loc[:, missing_bands] = -9999 # missing bands
                     list_out.append(rrs_filter)
-            out = pd.concat(list_out).reset_index()
-            out.to_csv(dirout + '/' + file)
+            out = pd.concat(list_out).reset_index(drop=True)
+            out.to_csv(os.path.join(dirout, file), index=False)
         except:
             pass
 
@@ -439,3 +454,4 @@ def shapefile(in_path: str, dest: str) -> None:
             pass
 
     return None
+
