@@ -36,4 +36,5 @@ Outputs include: 0-rawdata (data from AERONET-OC), 1-shapefile (site locations i
 
 ## Notes:
 
-* The quality-checking criteria can be accessed in: Paulino et al. 2025. PACE (Plankton, Aerosol, Cloud, ocean Ecosystem): Preliminary analysis of the consistency of remote sensing reflectance products over aquatic systems. (Under Review).
+* The quality-checking criteria can be accessed in: Paulino et al. 2026. PACE (Plankton, Aerosol, Cloud, ocean Ecosystem): Preliminary analysis of the consistency of remote sensing reflectance products over aquatic systems. ISPRS Journal of Photogrammetry and Remote Sensing 232, 196-209. https://doi.org/10.1016/j.isprsjprs.2025.12.003
+
