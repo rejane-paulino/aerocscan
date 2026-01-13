@@ -60,9 +60,9 @@ def download_aerOC(dest: str, start: str, end: str, level: str, id) -> None:
     return None
 
 
-def filtering_timeframe(in_path: str, start: str, end: str, local_time: str, dest: str) -> None:
+def filtering_timeframe(in_path: str, start: str, end: str, image_time: str, dest: str) -> None:
     """
-    Filters the AERONET-OC according the window time (+/- 3 hours).
+    Filters the AERONET-OC according the window time (+/- 1.5 hours).
     """
 
     # Creating a directory:
@@ -77,9 +77,9 @@ def filtering_timeframe(in_path: str, start: str, end: str, local_time: str, des
             # Combines date and time columns into a single datetime column:
             data['Datetime'] = pd.to_datetime(data['Date(dd-mm-yyyy)'] + ' ' + data['Time(hh:mm:ss)'], format='%d:%m:%Y %H:%M:%S')
 
-            # Filters the dataset considering +/- 3-hours timeframe:
-            datetime_start = datetime.strptime(f"{start} {local_time}", '%Y-%m-%d %H:%M:%S')
-            datetime_end = datetime.strptime(f"{end} {local_time}", '%Y-%m-%d %H:%M:%S')
+            # Filters the dataset considering +/- 1.5-hours timeframe:
+            datetime_start = datetime.strptime(f"{start} {image_time}", '%Y-%m-%d %H:%M:%S')
+            datetime_end = datetime.strptime(f"{end} {image_time}", '%Y-%m-%d %H:%M:%S')
             timeframe = timedelta(hours=1.5)  # timeframe
             datetime_start = (datetime_start - timeframe).strftime('%Y-%m-%d %H:%M:%S')
             datetime_end = (datetime_end + timeframe).strftime('%Y-%m-%d %H:%M:%S')
