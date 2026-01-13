@@ -3,7 +3,7 @@
 ![Language](https://img.shields.io/badge/language-Python-blue)
 ![License](https://img.shields.io/badge/license-GPL%203.0-blue)
 
-AerOC Scan is a Python package designed to download, filter, and correct AERONET-OC (Aerosol Robotic Network-Ocean Color) data. AERONET-OC comprises a global network of autonomous above-water radiometers located on fixed platforms in ocean, coastal, and inland waters. Here, nLW (normalized water-leaving radiance) measurements are selected based on the date and a timeframe of approximately 3-hours around the satellite overpass. These measurements are converted to Remote Sensing Reflectance and corrected according to the satellite spectral bands. In this version (v1), AerOC Scan supports Sentinel-2, Sentinel-3, Landsat-8/9, and PACE. 
+AerOC Scan is a Python package designed to download, filter, and correct AERONET-OC (Aerosol Robotic Network-Ocean Color) data. AERONET-OC comprises a global network of autonomous above-water radiometers located on fixed platforms in ocean, coastal, and inland waters. Here, nLW (normalized water-leaving radiance) measurements are selected based on the date and a timeframe of approximately 1.5-hours around the satellite overpass. These measurements are converted to Remote Sensing Reflectance and corrected according to the satellite spectral bands. In this version (v1), AerOC Scan supports Sentinel-2, Sentinel-3, Landsat-8/9, and PACE. 
 
 
 ## Requirements and Usage:
