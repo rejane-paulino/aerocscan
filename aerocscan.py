@@ -30,7 +30,7 @@ class AEROCSCAN:
         # Filters the parameters:
         tool.filtering_parameters(dirout + '/timeframe', dirout)
         # Calculates the rrs:
-        tool.rrs(dirout + '/parameters', self.dest)
+        tool.rrs(dirout + '/parameters', self.sensor_type, self.dest)
         # Classifies the OWTs:
         tool.owts(dirout + '/rrs_median', self.dest)
 
