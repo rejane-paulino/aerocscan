@@ -26,7 +26,7 @@ The AerOC Scan requires seven input data, including:
 * *start*: start date (yyyy-mm-dd);
 * *end*: end date (yyyy-mm-dd);
 * *id*: site id (or 'all');
-* *utc_time*: UTC time (hh:mm:ss);
+* *image_time*: image time (hh:mm:ss);
 * *sensor_type*: sensor type (S2A_MSI', 'S2B_MSI', S3A_OLCI', 'S3B_OLCI', 'L8_OLI', 'L9_OLI2', or 'PACE_OCI').
 
 > The input parameters must be manually configured in the `core.py` or `aerocscan.ipynb` file.
