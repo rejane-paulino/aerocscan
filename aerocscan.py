@@ -8,14 +8,14 @@ import toolbox as tool
 
 class AEROCSCAN:
 
-    def __init__(self, dest: str, level: str, id: str, start: str, end: str, local_time: str, sensor_type=None):
+    def __init__(self, dest: str, level: str, id: str, start: str, end: str, image_time: str, sensor_type=None):
 
         self.dest = dest
         self.level = level
         self.id = id
         self.start = start
         self.end = end
-        self.local_time = local_time
+        self.image_time = image_time
         self.sensor_type = sensor_type
 
     def run(self):
@@ -26,7 +26,7 @@ class AEROCSCAN:
         # Download - AERONET-OC:
         tool.download_aerOC(self.dest, self.start, self.end, self.level, self.id)
         # Filters the timeframe:
-        tool.filtering_timeframe(self.dest + '/0-rawdata', self.start, self.end, self.local_time, dirout)
+        tool.filtering_timeframe(self.dest + '/0-rawdata', self.start, self.end, self.image_time, dirout)
         # Filters the parameters:
         tool.filtering_parameters(dirout + '/timeframe', dirout)
         # Calculates the rrs:
