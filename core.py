@@ -12,7 +12,7 @@ Author: Paulino (Nov-29-2024)
 */ start: start date (yyyy-mm-dd);
 */ end: end date (yyyy-mm-dd);
 */ id: site id (or 'all');
-*/ local_time: local time (hh:mm:ss);
+*/ image_time: image time (hh:mm:ss);
 */ sensor_type: sensor type (S2A_MSI', 'S2B_MSI', S3A_OLCI', 'S3B_OLCI', 'L8_OLI', 'L9_OLI2', or 'PACE_OCI')
 
 ** Site id:
@@ -42,13 +42,13 @@ level = '20' # 15 or 20
 start = '2024-1-1' # yyyy-mm-dd
 end = '2024-12-31' # yyyy-mm-dd
 id = 'all' # 'all' - for all stations or specific int for station id
-local_time = '13:00:00' # hh:mm:ss
+image_time = '13:00:00' # hh:mm:ss
 sensor_type = 'S2A_MSI' # S2A_MSI', 'S2B_MSI', S3A_OLCI', 'S3B_OLCI', 'L8_OLI', 'L9_OLI2', or 'PACE_OCI'
 
 # Without band correction:
-aerocscan = AEROCSCAN(dest, level, id, start, end, local_time)
+aerocscan = AEROCSCAN(dest, level, id, start, end, image_time)
 aerocscan.run()
 
 # With band correction:
-aerocscan = AEROCSCAN(dest, level, id, start, end, local_time, sensor_type)
+aerocscan = AEROCSCAN(dest, level, id, start, end, image_time, sensor_type)
 aerocscan.run()
